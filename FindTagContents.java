@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class FindTagContents {
     public static void main(String[] args) {
         
@@ -9,9 +10,15 @@ public class FindTagContents {
         System.out.println("Enter tag type");
         String tag = scanner.nextLine();
 
-        int textPos = html.indexOf("<" + tag + ">");
-
-        // int closingTagStart = html.indexOf(tag, ">");
-        // html.indexOf
+        int startTextPos = html.indexOf("<" + tag + ">");
+        int endTextPos = html.indexOf("</" + tag + ">");
+        if (startTextPos >= 0 && endTextPos >= 0) {
+        String text = html.substring(startTextPos+tag.length()+2, endTextPos);
+        System.out.println(text);
+        scanner.close();
+        } else {
+            System.out.println("There are no " + tag + " tags in entered HTML");
+        }
+        
     }
 }
